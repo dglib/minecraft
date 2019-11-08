@@ -8,6 +8,6 @@ The image can now be pushed and scanned in DTR; this illistrates how the binary 
 Deploy minecraft server in kubernetes
 ```
 kubectl create ns minecraft
-kubectl -n minecraft -f deployment-minecraft.yaml -f service-minecraft.yaml
+kubectl -n minecraft -f minecraft.yaml
 ```
-This exposes node port "25565", which minecraft clients may bind to; however, I use a nodePort of 30065 across the workers for port mapping to nodes from teh service.
+This exposes container port "25565", which minecraft clients may bind to; however, I use a nodePort of 30065 across the workers for port mapping to nodes from the service.

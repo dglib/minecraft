@@ -1,0 +1,44 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: minecraft
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: minecraft-dep
+  namespace: minecraft
+  labels:
+    app: minecraft
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: minecraft
+  template:
+    metadata:
+      labels:
+        app: minecraft
+    spec:
+      containers:
+      - name: minecraft
+        image: shaker242/minecraft-mv:1.14.4
+        ports:
+        - containerPort: 25565
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: minecraft
+  name: minecraft-svc
+  namespace: minecraft
+spec:
+  ports:
+  - port: 25565
+    protocol: TCP
+    targetPort: 25565
+    nodePort: 30065 
+  selector:
+    app: minecraft
+  type: NodePort
