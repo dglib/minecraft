@@ -1,6 +1,6 @@
 pipeline {
   environment {
-    registry = "shaker242/jenkins"
+    registry = "shaker242/minecraft-mv"
     registryCredential = "dockerhub"
     dockerImage = ''
   }
@@ -14,7 +14,7 @@ pipeline {
     stage('Building image') {
       steps{
         script {
-             dir("minecraft"){
+             dir("/var/jenkins_home/workspace/minecraft"){
           dockerImage = docker.build registry + ":$BUILD_NUMBER"
           }
         }
