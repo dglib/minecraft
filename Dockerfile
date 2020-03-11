@@ -30,5 +30,5 @@ RUN addgroup -g 10001 -S appuser && adduser -u 10001 -S appuser -G appuser
 RUN chown -R appuser:appuser /usr/local /var/cache /var/log /var/run /opt/openjdk-15/bin
 RUN chmod +x /usr/local /var/cache /var/log /var/run /usr/local/logs
 USER appuser
-WORKDIR /usr/local/
+WORKDIR /opt/minecraft
 ENTRYPOINT java -Xmx1024M -Xms1024M -jar minecraft_server.1.15.2.jar nogui
