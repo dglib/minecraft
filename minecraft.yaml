@@ -22,9 +22,16 @@ spec:
     spec:
       containers:
       - name: minecraft
-        image: shaker242/minecraft-mv:1.14.4
+        image: shaker242/minecraft:ocp18
         ports:
         - containerPort: 25565
+        resources:
+          limits:
+            cpu: 1
+            memory: 1500Mi
+          requests:
+            cpu: 500m
+            memory: 1024Mi
 ---
 apiVersion: v1
 kind: Service
@@ -38,7 +45,7 @@ spec:
   - port: 25565
     protocol: TCP
     targetPort: 25565
-    nodePort: 30065 
+    #nodePort: 30065 
   selector:
     app: minecraft
   type: NodePort

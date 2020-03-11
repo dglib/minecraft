@@ -1,14 +1,19 @@
-FROM openjdk:12-jdk-alpine
-# USER root
+FROM openjdk:15-ea-jdk-alpine
 LABEL app=mindcraft
 LABEL APPROVED=no
 RUN echo "eula=true" > /usr/local/eula.txt
 EXPOSE 25565
-COPY server.jar /usr/local/
-COPY MedievalVillage.zip  /usr/local/
+COPY minecraft_server.1.15.2.jar /usr/local/
+# COPY MedievalVillage.zip  /usr/local/
 RUN cd /usr/local \
-    && unzip MedievalVillage.zip \
-    && rm -rf world \
-    && mv MedievalVillage world
+    && mkdir -p logs
+# RUN unzip MedievalVillage.zip \
+#     && rm -rf world \
+#     && mv MedievalVillage world
+RUN addgroup -g 1001 -S appuser && adduser -u 1001 -S appuser -G appuser
+RUN chown -R appuser:appuser /usr/local /var/cache /var/log /var/run /opt/openjdk-15/bin
+RUN chmod +x /usr/local /var/cache /var/log /var/run /usr/local/logs
+USER appuser
 WORKDIR /usr/local/
-CMD java -Xms1G -Xmx2G -Djava.nio.channels.spi.SelectorProvider=sun.nio.ch.PollSelectorProvider -jar server.jar nogui
+ENTRYPOINT java -Xmx1024M -Xms1024M -jar minecraft_server.1.15.2.jar nogui
+
