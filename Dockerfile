@@ -17,5 +17,5 @@ RUN chown -R appuser /usr/local /var/cache /var/log /var/run
 # RUN chgrp -R 0 /run && chmod -R g=u /run
 # RUN chmod +x /usr/local /var/cache /var/log /var/run /usr/local/logs
 WORKDIR /usr/local
-# USER appuser
+USER appuser
 ENTRYPOINT java -Xmx2G -Xms2G -jar minecraft_server.1.15.2.jar nogui
