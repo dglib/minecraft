@@ -6,13 +6,15 @@ EXPOSE 25565
 COPY minecraft_server.1.15.2.jar /usr/local/
 # COPY MedievalVillage.zip  /usr/local/
 RUN cd /usr/local \
-    && mkdir -p logs
+    && mkdir -p logs \
+    && umask 0002
 # RUN unzip MedievalVillage.zip \
 #     && rm -rf world \
 #     && mv MedievalVillage world
+RUN mkdir -p /usr/local/logs 
 RUN addgroup -g 100001 -S appuser && adduser -u 100001 -S appuser -G appuser
-RUN chown -R appuser:appuser /usr/local /var/cache /var/log /var/run /opt/openjdk-15/bin
-RUN chmod +x /usr/local /var/cache /var/log /var/run /usr/local/logs
-USER appuser
+RUN chown -R appuser:appuser /usr/local /var/cache /var/log /var/run
+# RUN chmod +x /usr/local /var/cache /var/log /var/run /usr/local/logs
 WORKDIR /usr/local
-ENTRYPOINT java -Xmx1024M -Xms1024M -jar minecraft_server.1.15.2.jar nogui
+USER appuser
+ENTRYPOINT java -Xmx2G -Xms2G -jar minecraft_server.1.15.2.jar nogui
