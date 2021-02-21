@@ -17,10 +17,17 @@ spec:
     spec:
       containers:
       - name: minecraft
-        image: shaker242/minecraft:001
+        image: shaker242/minecraft:forged
         ports:
         - containerPort: 25565
         resources:
           limits:
-            cpu: 1
-            memory: 2Gi
+            cpu: 2
+            memory: 3Gi
+        volumeMounts:
+        - mountPath: /usr/local/world/
+          name: world-map
+      volumes:
+      - name: world-map
+        persistentVolumeClaim:
+          claimName: harry-potter-pvc 
