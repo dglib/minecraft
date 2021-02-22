@@ -22,12 +22,19 @@ spec:
         - containerPort: 25565
         resources:
           limits:
-            cpu: 2
-            memory: 3Gi
+            cpu: 1.5
+            memory: 2Gi
         volumeMounts:
         - mountPath: /usr/local/world/
           name: world-map
+        - mountPath: /usr/local/server.properties
+          name: server-properties
+          subPath: server.properties
       volumes:
       - name: world-map
         persistentVolumeClaim:
-          claimName: harry-potter-pvc 
+          claimName: world-one-pvc 
+      - name: server-properties
+        configMap:
+          name: minecraft-server-properties
+
