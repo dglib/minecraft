@@ -1,4 +1,4 @@
-node {
+openjdk {
     def app
 
     stage('Clone repository') {
