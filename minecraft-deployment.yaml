@@ -33,7 +33,7 @@ spec:
       volumes:
       - name: world-map
         persistentVolumeClaim:
-          claimName: world-one-pvc 
+          claimName: zombie-apocalypse-pvc
       - name: server-properties
         configMap:
           name: minecraft-server-properties

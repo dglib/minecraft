@@ -1,7 +1,7 @@
 ## Simple Minecraft Java Server on OpenShift
 
 ### Bedrock
-* New : Added /bedrock/Dockerfile
+* New : Added /bedrock/Dockerfile \
 Build your own image or fetch shaker242/minecraft:bedrock
 Bedrock is still Alpha at this time, but it's up and running on OCP 4.x
 Bedrock runs against two IPv4 ports, the primary port is 19132/tcp and NodePort 
